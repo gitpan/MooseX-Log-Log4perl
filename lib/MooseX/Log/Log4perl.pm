@@ -2,9 +2,8 @@ package MooseX::Log::Log4perl;
 
 use Moose::Role;
 use Log::Log4perl;
-use Data::Dumper;
 
-our $VERSION = '0.3.0';
+our $VERSION = '0.30';
 
 has 'logger' => (
 	is      => 'rw',
@@ -83,7 +82,7 @@ MooseX::Log::Log4perl - A Logging Role for Moose based on Log::Log4perl
 
 =head1 VERSION
 
-This document describes MooseX::Log::Log4perl version 0.3.0
+This document describes MooseX::Log::Log4perl version 0.30
 
 =head1 SYNOPSIS
 
