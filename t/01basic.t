@@ -59,7 +59,7 @@ sub test_logger {
 	untie *STDERR;
 
 	# Cleanup log output
-	$err =~ s/(ConfigLogTest)=HASH\([^\)]+\)/$1/gm;
+	#$err =~ s/(ConfigLogTest)=HASH\([^\)]+\)/$1/gm;
 	$err =~ s/\r\n/\n/gm;
 
 	my $expect = <<__ENDLOG__;
