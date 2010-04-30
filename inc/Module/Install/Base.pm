@@ -4,7 +4,7 @@ package Module::Install::Base;
 use strict 'vars';
 use vars qw{$VERSION};
 BEGIN {
-	$VERSION = '0.94';
+	$VERSION = '0.88';
 }
 
 # Suspend handler for "redefined" warnings
@@ -13,34 +13,42 @@ BEGIN {
 	$SIG{__WARN__} = sub { $w };
 }
 
-#line 42
+### This is the ONLY module that shouldn't have strict on
+# use strict;
+
+#line 45
 
 sub new {
-	my $class = shift;
-	unless ( defined &{"${class}::call"} ) {
-		*{"${class}::call"} = sub { shift->_top->call(@_) };
+	my ($class, %args) = @_;
+
+	foreach my $method ( qw(call load) ) {
+		next if defined &{"$class\::$method"};
+		*{"$class\::$method"} = sub {
+			shift()->_top->$method(@_);
+		};
 	}
-	unless ( defined &{"${class}::load"} ) {
-		*{"${class}::load"} = sub { shift->_top->load(@_) };
-	}
-	bless { @_ }, $class;
+
+	bless( \%args, $class );
 }
 
-#line 61
+#line 66
 
 sub AUTOLOAD {
+	my $self = shift;
 	local $@;
-	my $func = eval { shift->_top->autoload } or return;
-	goto &$func;
+	my $autoload = eval {
+		$self->_top->autoload
+	} or return;
+	goto &$autoload;
 }
 
-#line 75
+#line 83
 
 sub _top {
 	$_[0]->{_top};
 }
 
-#line 90
+#line 98
 
 sub admin {
 	$_[0]->_top->{admin}
@@ -48,7 +56,7 @@ sub admin {
 	Module::Install::Base::FakeAdmin->new;
 }
 
-#line 106
+#line 114
 
 sub is_admin {
 	$_[0]->admin->VERSION;
@@ -75,4 +83,4 @@ BEGIN {
 
 1;
 
-#line 154
+#line 162

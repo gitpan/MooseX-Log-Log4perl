@@ -1,5 +1,8 @@
 Revision history for MooseX::Log::Log4perl
 
+0.42  Thu Apr 29 2010 (again)
+	* Remove Log::Any from benchmark tests, we want to avoid failing tests
+
 0.41  Thu Apr 29 2010
 	* Added POD::Covergage test (t/podcoverage.t)
 	* Added Perl::Critic test (t/pelr-critic.t)
@@ -9,7 +12,12 @@ Revision history for MooseX::Log::Log4perl
 	* Raise required perl version to 5.8
 
 0.40  Sun May 17 2009
+	* #45554: Applied patch for easy method handling for %M pattern by Tim Bunce
 	* Added t/99bench.t for basic benchmark testing
+	* Added load test of ::Easy and diag printing of version numbers to t/00load.t
+ 	* Updated included Module::Install to 0.88
+	* Improved tests to include %M pattern
+	* Only do the benchmark test for TEST_MAINT is set, otherwise skip
 
 0.31  Mon Jul 21 2008
 	* Fixed bug reported by Maik Hentsche

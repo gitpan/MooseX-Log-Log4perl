@@ -49,8 +49,8 @@ logmethods for all available levels to your class instance. Hence it is possible
 
 without having to access a seperate log attribute as in MooseX::Log::Log4perl;
 
-In case your app grows and you need more of the super-cow powers of Log4perl or simply don't want the additional
-methodes to clutter up your class you can simply replace all code C<< $self->log_LEVEL >> with
+In case your app grows and you need more of the super-cow powers of Log4perl or simply don't want the additional 
+methods to clutter up your class you can simply replace all code C<< $self->log_LEVEL >> with 
 C<< $self->log->LEVEL >>.
 
 You can use the following regex substitution to accomplish that:

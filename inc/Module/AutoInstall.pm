@@ -670,22 +670,9 @@ sub _load {
 
 # Load CPAN.pm and it's configuration
 sub _load_cpan {
-    return if $CPAN::VERSION and $CPAN::Config and not @_;
+    return if $CPAN::VERSION and not @_;
     require CPAN;
-
-    # CPAN-1.82+ adds CPAN::Config::AUTOLOAD to redirect to
-    #    CPAN::HandleConfig->load. CPAN reports that the redirection
-    #    is deprecated in a warning printed at the user.
-
-    # CPAN-1.81 expects CPAN::HandleConfig->load, does not have
-    #   $CPAN::HandleConfig::VERSION but cannot handle
-    #   CPAN::Config->load
-
-    # Which "versions expect CPAN::Config->load?
-
-    if ( $CPAN::HandleConfig::VERSION
-        || CPAN::HandleConfig->can('load')
-    ) {
+    if ( $CPAN::HandleConfig::VERSION ) {
         # Newer versions of CPAN have a HandleConfig module
         CPAN::HandleConfig->load;
     } else {
@@ -815,4 +802,4 @@ END_MAKE
 
 __END__
 
-#line 1069
+#line 1056
